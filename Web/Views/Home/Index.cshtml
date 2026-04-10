@@ -1,5 +1,16 @@
 ﻿@model IndexViewModel
-<div class="">
-    Notifications
-
-</div>
+@if (!Model.HasNotifications)
+{
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Notifications</h5>
+        </div>
+        <div class="card-body">
+            <span class="form-text">No notifications to show</span>
+        </div>
+    </div>
+}
+else
+{
+    await Html.PartialAsync(partialViewName: "NotificationWidget.cshtml", model: new NotificationWidgetViewModel(Model.Notifications));
+}
